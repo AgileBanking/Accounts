@@ -30,17 +30,19 @@ class AdminController {
             <br>
             <ol>
               <li><a href="XSD" target="_blank">Data
-            Model in XML Schema</a></li>
+            Model in XML Schema[1]</a></li>
               <li><a href="JSD" target="_blank">Data
-            Model in JSON Schema</a></li>
+            Model in JSON Schema[1]</a></li>
               <li><a href="relationsDiagram" target="_blank">Relations
             Diagram</a></li>
               <li><a href="actionsByController" target="_blank">Actions
-            by Controller</a></li>\n\
+            by Controller [2]</a></li>\n\
             <li><a href="listMethods" target="_blank">List of easily available Methods</a></li>
             </ol>
-                You can address specific domain class by appending:<br>
-                <big><span style="font-weight: bold;">?ClassName={classname}</span></big><br>
+                [1] You can address specific domain class by appending: 
+                <big><span style="font-weight: bold;">?ClassName={classname}</span><br></big>\n\
+                [2] You can address specific controller by appending: 
+                <big><span style="font-weight: bold;">?ControllerName={controllername}</span></big><br>
             </body>
             </html>
         """
@@ -92,7 +94,7 @@ class AdminController {
                     relationships += "[$domainClass.name],"  
                 }
             }
-            redirect(url: "http://yuml.me/diagram/nofunky;dir:LR/class/draw2/" + classes + relationships)            
+            redirect(url: "http://yuml.me/diagram/nofunky;dir:TD/class/draw2/" + classes + relationships)            
         }
         else {
             // Show the local diagram
@@ -164,7 +166,7 @@ class AdminController {
                                        maxOccurs "unbounded"                                       
                                    } else if (["id", "lastUpdated", "dateCreated", "version", "recStatus"].contains(p.name))
                                        readOnly true
-                                }   
+                                }  
                                 if (p.optional) {
                                     optional true
                                     }
@@ -202,8 +204,7 @@ class AdminController {
 
     def XSD (String ClassName) {
         def appName = grailsApplication.metadata['app.name']
-        def className = ClassName
-//        println "ClassName: $className"
+        def className = ClassName.capitalize()
         def writer = new StringWriter()
         def schema = new MarkupBuilder(writer)        
         def domains = grailsApplication.getArtefacts("Domain")
@@ -284,10 +285,11 @@ class AdminController {
         def domains = grailsApplication.getArtefacts("Domain")
         domains.each {domain -> 
             if (params.domain==null || domain.name==params.domain){
-                myMethods =  domain.metaClass.methods*.name.sort().unique()
+                myMethods = domain.metaClass.methods*.name.sort().unique()
+//                myMethods += ["TotalDynamicMethods" : "$myMethods.size" ]
                 myMap["TotalDynamicMethodsFor_" + "$domain.name"]=myMethods.size
-                myMap["Methods of $domain.name"]= myMethods
-            }
+                myMap["$domain.name"]= myMethods
+            } 
         }
         withFormat{
             json {render myMap as JSON}
@@ -306,16 +308,19 @@ class AdminController {
             }             
             grailsApplication.controllerClasses.each {cc ->    
             String controller = cc.logicalPropertyName
-            "$controller" {                   
-                cc.clazz.methods.each { m->
-                    String action = m.name 
-                    def ann = m.getAnnotation(Action)
-                    if (ann) { 
-                        Class[] argTypes = ann.commandObjects()
-                        "$action" "/${controller}/$action(${argTypes*.name.join(', ')})" - 'entities.' - '()'
+
+            if (ControllerName==null || ControllerName.toLowerCase()==controller) {
+                "$controller" {                   
+                    cc.clazz.methods.each { m->
+                        String action = m.name 
+                        def ann = m.getAnnotation(Action)
+                        if (ann) { 
+                            Class[] argTypes = ann.commandObjects()
+                            "$action" "/${controller}/$action(${argTypes*.name.join(', ')})" - 'entities.' - '()'
+                        }
                     }
-                }
-             }
+                 }
+            }
           }
        }   
        render jactions.toPrettyString()
