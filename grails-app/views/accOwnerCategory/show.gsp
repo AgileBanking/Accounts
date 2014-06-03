@@ -41,6 +41,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${accOwnerCategoryInstance?.side}">
+				<li class="fieldcontain">
+					<span id="side-label" class="property-label"><g:message code="accOwnerCategory.side.label" default="Side" /></span>
+					
+						<span class="property-value" aria-labelledby="side-label"><g:fieldValue bean="${accOwnerCategoryInstance}" field="side"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${accOwnerCategoryInstance?.title}">
 				<li class="fieldcontain">
 					<span id="title-label" class="property-label"><g:message code="accOwnerCategory.title.label" default="Title" /></span>

@@ -18,6 +18,14 @@
 	<g:textField name="code" maxlength="6" value="${accOwnerCategoryInstance?.code}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: accOwnerCategoryInstance, field: 'side', 'error')} ">
+	<label for="side">
+		<g:message code="accOwnerCategory.side.label" default="Side" />
+		
+	</label>
+	<g:select name="side" from="${accOwnerCategoryInstance.constraints.side.inList}" value="${accOwnerCategoryInstance?.side}" valueMessagePrefix="accOwnerCategory.side" noSelection="['': '']"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: accOwnerCategoryInstance, field: 'title', 'error')} ">
 	<label for="title">
 		<g:message code="accOwnerCategory.title.label" default="Title" />
@@ -39,7 +47,7 @@
 		<g:message code="accOwnerCategory.notes.label" default="Notes" />
 		
 	</label>
-	<g:textField name="notes" value="${accOwnerCategoryInstance?.notes}"/>
+	<g:textArea name="notes" cols="40" rows="5" maxlength="250" value="${accOwnerCategoryInstance?.notes}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: accOwnerCategoryInstance, field: 'accOwner', 'error')} required">

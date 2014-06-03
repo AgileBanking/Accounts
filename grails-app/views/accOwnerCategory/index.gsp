@@ -28,13 +28,13 @@
 					
 						<g:sortableColumn property="code" title="${message(code: 'accOwnerCategory.code.label', default: 'Code')}" />
 					
+						<g:sortableColumn property="side" title="${message(code: 'accOwnerCategory.side.label', default: 'Side')}" />
+					
 						<g:sortableColumn property="title" title="${message(code: 'accOwnerCategory.title.label', default: 'Title')}" />
 					
 						<g:sortableColumn property="titleInt" title="${message(code: 'accOwnerCategory.titleInt.label', default: 'Title Int')}" />
 					
 						<g:sortableColumn property="notes" title="${message(code: 'accOwnerCategory.notes.label', default: 'Notes')}" />
-					
-						<g:sortableColumn property="recStatus" title="${message(code: 'accOwnerCategory.recStatus.label', default: 'Rec Status')}" />
 					
 					</tr>
 				</thead>
@@ -46,13 +46,13 @@
 					
 						<td>${fieldValue(bean: accOwnerCategoryInstance, field: "code")}</td>
 					
+						<td>${fieldValue(bean: accOwnerCategoryInstance, field: "side")}</td>
+					
 						<td>${fieldValue(bean: accOwnerCategoryInstance, field: "title")}</td>
 					
 						<td>${fieldValue(bean: accOwnerCategoryInstance, field: "titleInt")}</td>
 					
 						<td>${fieldValue(bean: accOwnerCategoryInstance, field: "notes")}</td>
-					
-						<td>${fieldValue(bean: accOwnerCategoryInstance, field: "recStatus")}</td>
 					
 					</tr>
 				</g:each>

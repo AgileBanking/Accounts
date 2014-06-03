@@ -3,6 +3,7 @@ package entities
 class AccOwnerCategory {   
     CategoryType    categoryType 
     String          code
+    String          side = "C"
     String          title
     String          titleInt
     String          notes
@@ -25,6 +26,7 @@ class AccOwnerCategory {
     static constraints = {
         categoryType    ()
         code            (unique:true, maxSize:6)
+        side            (inList:["C", "I"]) // C: Customer, I: Investor in a triple-parties deal
         title           (unique:true)
         titleInt        (unique:true)
         notes           (nullabe:true, maxSize:250, widget: 'textarea')
