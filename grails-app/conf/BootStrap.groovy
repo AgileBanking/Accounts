@@ -16,8 +16,17 @@ class BootStrap {
         
         def rl1 = new entities.RiskLevel(title:"Χαμηλό", titleInt:"Low").save()  
         def rl2 = new entities.RiskLevel(title:"Λογικό", titleInt:"Moderate").save()  
-        def rl3 = new entities.RiskLevel(title:"Υψηλό", titleInt:"High").save()         
- 
+        def rl3 = new entities.RiskLevel(title:"Υψηλό", titleInt:"High").save()        
+        
+        def pr1  = new entities.PartyRole(role:"Προσφέρων", roleInt:"Offerer").save()
+        def pr2  = new entities.PartyRole(role:"Αποδέκτης", roleInt:"Acceptor").save()
+        def pr3  = new entities.PartyRole(role:"Πρώτος Αποδέκτης", roleInt:"Primary Acceptor").save()
+        def pr4  = new entities.PartyRole(role:"Δεύτερος Αποδέκτης", roleInt:"Secondary Acceptor").save()
+        def pr5  = new entities.PartyRole(role:"Εγγυητής", roleInt:"Guarantor").save()
+        def pr6  = new entities.PartyRole(role:"Αντίκλητος", roleInt:"Procedural Representative").save()
+        def pr7  = new entities.PartyRole(role:"Νομικός Εκπρόσωπος", roleInt:"Legal Represetative").save()
+        def pr8  = new entities.PartyRole(role:"Διαχειριστής", roleInt:"Administrator").save()
+        def pr9  = new entities.PartyRole(role:"Κειδεμόνας", roleInt:"Custodian").save()
     }
     def destroy = {
     }

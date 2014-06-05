@@ -37,8 +37,8 @@ class Account {
     
     String toString() {"$accNo:$name"}
     
-    static belongsTo = [accOwner:AccOwner]
-    static hasMany = [transactions:Transaction, shadowAccounts:ShadowAccount]
+//    static belongsTo = [accOwner:AccOwner]
+    static hasMany = [transactions:Transaction, shadowAccounts:ShadowAccount, contractParties:ContractParty ]
     
     static mapping = {
         accNo index:'Acc_Idx'
@@ -47,9 +47,11 @@ class Account {
     static constraints = {
         accNo           (unique:true, size:8..40)
         name            (blank:true, nulable:true, maxsize:40)
-        accOwner        ()
+        contractParties ()
+//        accOwner        ()
         accStatus       ()
         accType         ()
+        contract        (nullable:true)
         productPolicy   ()
         dateOpened      (editable:false, format:'yyyy-mm-dd', validator:{it<new Date()})
         lastMovement    (editable:false, format:'yyyy-mm-dd', validator:{it<new Date()})
