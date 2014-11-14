@@ -18,12 +18,21 @@
 	<g:textField name="name" value="${accountInstance?.name}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: accountInstance, field: 'accOwner', 'error')} required">
-	<label for="accOwner">
-		<g:message code="account.accOwner.label" default="Acc Owner" />
-		<span class="required-indicator">*</span>
+<div class="fieldcontain ${hasErrors(bean: accountInstance, field: 'parties', 'error')} ">
+	<label for="parties">
+		<g:message code="account.parties.label" default="Parties" />
+		
 	</label>
-	<g:select id="accOwner" name="accOwner.id" from="${entities.AccOwner.list()}" optionKey="id" required="" value="${accountInstance?.accOwner?.id}" class="many-to-one"/>
+	
+<ul class="one-to-many">
+<g:each in="${accountInstance?.parties?}" var="p">
+    <li><g:link controller="contractParty" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="contractParty" action="create" params="['account.id': accountInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'contractParty.label', default: 'ContractParty')])}</g:link>
+</li>
+</ul>
+
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: accountInstance, field: 'accStatus', 'error')} required">
@@ -34,12 +43,12 @@
 	<g:select id="accStatus" name="accStatus.id" from="${entities.AccountStatus.list()}" optionKey="id" required="" value="${accountInstance?.accStatus?.id}" class="many-to-one"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: accountInstance, field: 'accType', 'error')} required">
-	<label for="accType">
-		<g:message code="account.accType.label" default="Acc Type" />
-		<span class="required-indicator">*</span>
+<div class="fieldcontain ${hasErrors(bean: accountInstance, field: 'accTypes', 'error')} ">
+	<label for="accTypes">
+		<g:message code="account.accTypes.label" default="Acc Types" />
+		
 	</label>
-	<g:select id="accType" name="accType.id" from="${entities.AccountType.list()}" optionKey="id" required="" value="${accountInstance?.accType?.id}" class="many-to-one"/>
+	<g:select name="accTypes" from="${entities.AccountType.list()}" multiple="multiple" optionKey="id" size="5" value="${accountInstance?.accTypes*.id}" class="many-to-many"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: accountInstance, field: 'productPolicy', 'error')} required">
@@ -233,22 +242,6 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="riskLevel" name="riskLevel.id" from="${entities.RiskLevel.list()}" optionKey="id" required="" value="${accountInstance?.riskLevel?.id}" class="many-to-one"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: accountInstance, field: 'statementDelivery', 'error')} required">
-	<label for="statementDelivery">
-		<g:message code="account.statementDelivery.label" default="Statement Delivery" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="statementDelivery" name="statementDelivery.id" from="${entities.StatementDelivery.list()}" optionKey="id" required="" value="${accountInstance?.statementDelivery?.id}" class="many-to-one"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: accountInstance, field: 'statementFrequency', 'error')} required">
-	<label for="statementFrequency">
-		<g:message code="account.statementFrequency.label" default="Statement Frequency" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="statementFrequency" name="statementFrequency.id" from="${entities.StatementFrequency.list()}" optionKey="id" required="" value="${accountInstance?.statementFrequency?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: accountInstance, field: 'transactions', 'error')} ">

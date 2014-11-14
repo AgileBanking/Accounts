@@ -23,6 +23,15 @@
 			</g:if>
 			<ol class="property-list contractParty">
 			
+				<g:if test="${contractPartyInstance?.type}">
+				<li class="fieldcontain">
+					<span id="type-label" class="property-label"><g:message code="contractParty.type.label" default="Type" /></span>
+					
+						<span class="property-value" aria-labelledby="type-label"><g:fieldValue bean="${contractPartyInstance}" field="type"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${contractPartyInstance?.contract}">
 				<li class="fieldcontain">
 					<span id="contract-label" class="property-label"><g:message code="contractParty.contract.label" default="Contract" /></span>

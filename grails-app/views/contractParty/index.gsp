@@ -24,6 +24,8 @@
 			<thead>
 					<tr>
 					
+						<g:sortableColumn property="type" title="${message(code: 'contractParty.type.label', default: 'Type')}" />
+					
 						<th><g:message code="contractParty.contract.label" default="Contract" /></th>
 					
 						<th><g:message code="contractParty.role.label" default="Role" /></th>
@@ -38,7 +40,9 @@
 				<g:each in="${contractPartyInstanceList}" status="i" var="contractPartyInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${contractPartyInstance.id}">${fieldValue(bean: contractPartyInstance, field: "contract")}</g:link></td>
+						<td><g:link action="show" id="${contractPartyInstance.id}">${fieldValue(bean: contractPartyInstance, field: "type")}</g:link></td>
+					
+						<td>${fieldValue(bean: contractPartyInstance, field: "contract")}</td>
 					
 						<td>${fieldValue(bean: contractPartyInstance, field: "role")}</td>
 					

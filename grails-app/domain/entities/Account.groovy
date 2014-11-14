@@ -3,7 +3,7 @@ package entities
 class Account {
     String              accNo
     String              name      
-    AccountType         accType
+//    AccountType         accType
     Long                masterProduct
     String              currencyIso2
     Long                productPolicy // περιλαμβάνει ή χρειάζεται να έχουμε και τη Version?
@@ -28,8 +28,8 @@ class Account {
     BigDecimal          blocked = 0
     String              notes
     String              migratedAccNo
-    StatementFrequency  statementFrequency
-    StatementDelivery   statementDelivery
+//    StatementFrequency  statementFrequency
+//    StatementDelivery   statementDelivery
     String              recStatus
     Date                dateCreated //system timestamp
     Date                lastUpdated //system timestamp
@@ -38,7 +38,8 @@ class Account {
     String toString() {"$accNo:$name"}
     
 //    static belongsTo = [accOwner:AccOwner]
-    static hasMany = [transactions:Transaction, shadowAccounts:ShadowAccount, contractParties:ContractParty ]
+    static hasMany = [transactions:Transaction, shadowAccounts:ShadowAccount, parties:ContractParty, accTypes:AccountType  ]
+//    static belongsTo= [contract:Contract]
     
     static mapping = {
         accNo index:'Acc_Idx'
@@ -47,11 +48,12 @@ class Account {
     static constraints = {
         accNo           (unique:true, size:8..40)
         name            (blank:true, nulable:true, maxsize:40)
-        contractParties ()
+//        contract        (nullable:true)
+        parties         ()
 //        accOwner        ()
         accStatus       ()
-        accType         ()
-        contract        (nullable:true)
+        accTypes        (nulable:true)
+//        contract        (nullable:true)
         productPolicy   ()
         dateOpened      (editable:false, format:'yyyy-mm-dd', validator:{it<new Date()})
         lastMovement    (editable:false, format:'yyyy-mm-dd', validator:{it<new Date()})

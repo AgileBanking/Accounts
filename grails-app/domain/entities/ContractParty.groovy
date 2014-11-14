@@ -8,13 +8,14 @@ class ContractParty {
     
     String toString() {"$role: $party"}
     
-    static belongsTo = [contract:Contract]
+    static belongsTo = [contract:Contract, account:Account]
     
     static constraints = {
-        type    (inList:["Person", "Legal Entity"])
-        contract (nullable:false)
-        role    (nullable:false)
-        party   (unique:'contract')
-        notes   (nullable:true)
+        type        (inList:["Person", "Legal Entity"])
+        account     (nullable:true)
+        contract    (nullable:true)
+        role        (nullable:false)
+        party       (unique:'contract')
+        notes       (nullable:true)
     }
 }

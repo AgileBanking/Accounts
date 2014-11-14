@@ -41,6 +41,17 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${contractInstance?.accounts}">
+				<li class="fieldcontain">
+					<span id="accounts-label" class="property-label"><g:message code="contract.accounts.label" default="Accounts" /></span>
+					
+						<g:each in="${contractInstance.accounts}" var="a">
+						<span class="property-value" aria-labelledby="accounts-label"><g:link controller="account" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${contractInstance?.parties}">
 				<li class="fieldcontain">
 					<span id="parties-label" class="property-label"><g:message code="contract.parties.label" default="Parties" /></span>

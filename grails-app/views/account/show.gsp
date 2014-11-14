@@ -41,11 +41,13 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${accountInstance?.accOwner}">
+				<g:if test="${accountInstance?.parties}">
 				<li class="fieldcontain">
-					<span id="accOwner-label" class="property-label"><g:message code="account.accOwner.label" default="Acc Owner" /></span>
+					<span id="parties-label" class="property-label"><g:message code="account.parties.label" default="Parties" /></span>
 					
-						<span class="property-value" aria-labelledby="accOwner-label"><g:link controller="accOwner" action="show" id="${accountInstance?.accOwner?.id}">${accountInstance?.accOwner?.encodeAsHTML()}</g:link></span>
+						<g:each in="${accountInstance.parties}" var="p">
+						<span class="property-value" aria-labelledby="parties-label"><g:link controller="contractParty" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
+						</g:each>
 					
 				</li>
 				</g:if>
@@ -59,11 +61,13 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${accountInstance?.accType}">
+				<g:if test="${accountInstance?.accTypes}">
 				<li class="fieldcontain">
-					<span id="accType-label" class="property-label"><g:message code="account.accType.label" default="Acc Type" /></span>
+					<span id="accTypes-label" class="property-label"><g:message code="account.accTypes.label" default="Acc Types" /></span>
 					
-						<span class="property-value" aria-labelledby="accType-label"><g:link controller="accountType" action="show" id="${accountInstance?.accType?.id}">${accountInstance?.accType?.encodeAsHTML()}</g:link></span>
+						<g:each in="${accountInstance.accTypes}" var="a">
+						<span class="property-value" aria-labelledby="accTypes-label"><g:link controller="accountType" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
+						</g:each>
 					
 				</li>
 				</g:if>
@@ -309,24 +313,6 @@
 					<span id="riskLevel-label" class="property-label"><g:message code="account.riskLevel.label" default="Risk Level" /></span>
 					
 						<span class="property-value" aria-labelledby="riskLevel-label"><g:link controller="riskLevel" action="show" id="${accountInstance?.riskLevel?.id}">${accountInstance?.riskLevel?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${accountInstance?.statementDelivery}">
-				<li class="fieldcontain">
-					<span id="statementDelivery-label" class="property-label"><g:message code="account.statementDelivery.label" default="Statement Delivery" /></span>
-					
-						<span class="property-value" aria-labelledby="statementDelivery-label"><g:link controller="statementDelivery" action="show" id="${accountInstance?.statementDelivery?.id}">${accountInstance?.statementDelivery?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${accountInstance?.statementFrequency}">
-				<li class="fieldcontain">
-					<span id="statementFrequency-label" class="property-label"><g:message code="account.statementFrequency.label" default="Statement Frequency" /></span>
-					
-						<span class="property-value" aria-labelledby="statementFrequency-label"><g:link controller="statementFrequency" action="show" id="${accountInstance?.statementFrequency?.id}">${accountInstance?.statementFrequency?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

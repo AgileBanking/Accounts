@@ -62,7 +62,7 @@ class AdminController {
         }
         // if there is internet connection ask yUML.me to draw the diagram, else use the local image
         if (urlConnection.connected) {
-            def domainClasses = grailsApplication.getArtefacts("Domain")
+            def domainClasses = grailsApplication.getArtefacts("Domain").sort{it.name}
             def classes = ''
             def classrelation = ''
             def relationships = ''
@@ -76,7 +76,7 @@ class AdminController {
                             // if its association only show the owning side
                             if(!prop.isBidirectional() || prop.isOwningSide() || proType == domainClass.name )
                                 classrelation = getRelationship(domainClass.name, prop)
-                                if (!relationships.contains(classrelation)) {
+                                if (!relationships.contains(classrelation) && !relations.contains(classrelation)) {
                                     relations = "$relations \n$classrelation" 
                                 }
                         } else {
@@ -141,7 +141,7 @@ class AdminController {
         def appName = grailsApplication.metadata['app.name']
         def cons
 //        println "appName: $appName" 
-        def domains = grailsApplication.getArtefacts("Domain")
+        def domains = grailsApplication.getArtefacts("Domain").sort{it.name}
         def jschema = new JsonBuilder()
         jschema."$appName"{
         domains.each { c -> 
@@ -204,10 +204,10 @@ class AdminController {
 
     def XSD (String ClassName) {
         def appName = grailsApplication.metadata['app.name']
-        def className = ClassName.capitalize()
+//        def className = ClassName?.capitalize()
         def writer = new StringWriter()
         def schema = new MarkupBuilder(writer)        
-        def domains = grailsApplication.getArtefacts("Domain")
+        def domains = grailsApplication.getArtefacts("Domain").sort{it.name}
         def str = ""
         def ptype = []
         schema."xs:component" (name: "$appName") {

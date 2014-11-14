@@ -2,6 +2,14 @@
 
 
 
+<div class="fieldcontain ${hasErrors(bean: contractPartyInstance, field: 'type', 'error')} ">
+	<label for="type">
+		<g:message code="contractParty.type.label" default="Type" />
+		
+	</label>
+	<g:select name="type" from="${contractPartyInstance.constraints.type.inList}" value="${contractPartyInstance?.type}" valueMessagePrefix="contractParty.type" noSelection="['': '']"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: contractPartyInstance, field: 'contract', 'error')} required">
 	<label for="contract">
 		<g:message code="contractParty.contract.label" default="Contract" />

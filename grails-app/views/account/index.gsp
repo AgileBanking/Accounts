@@ -24,3 +24,43 @@
 			<thead>
 					<tr>
 					
+						<g:sortableColumn property="accNo" title="${message(code: 'account.accNo.label', default: 'Acc No')}" />
+					
+						<g:sortableColumn property="name" title="${message(code: 'account.name.label', default: 'Name')}" />
+					
+						<th><g:message code="account.accStatus.label" default="Acc Status" /></th>
+					
+						<g:sortableColumn property="productPolicy" title="${message(code: 'account.productPolicy.label', default: 'Product Policy')}" />
+					
+						<g:sortableColumn property="dateOpened" title="${message(code: 'account.dateOpened.label', default: 'Date Opened')}" />
+					
+						<g:sortableColumn property="lastMovement" title="${message(code: 'account.lastMovement.label', default: 'Last Movement')}" />
+					
+					</tr>
+				</thead>
+				<tbody>
+				<g:each in="${accountInstanceList}" status="i" var="accountInstance">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					
+						<td><g:link action="show" id="${accountInstance.id}">${fieldValue(bean: accountInstance, field: "accNo")}</g:link></td>
+					
+						<td>${fieldValue(bean: accountInstance, field: "name")}</td>
+					
+						<td>${fieldValue(bean: accountInstance, field: "accStatus")}</td>
+					
+						<td>${fieldValue(bean: accountInstance, field: "productPolicy")}</td>
+					
+						<td><g:formatDate date="${accountInstance.dateOpened}" /></td>
+					
+						<td><g:formatDate date="${accountInstance.lastMovement}" /></td>
+					
+					</tr>
+				</g:each>
+				</tbody>
+			</table>
+			<div class="pagination">
+				<g:paginate total="${accountInstanceCount ?: 0}" />
+			</div>
+		</div>
+	</body>
+</html>

@@ -18,6 +18,14 @@
 	<g:textField name="registrationId" value="${contractInstance?.registrationId}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: contractInstance, field: 'accounts', 'error')} ">
+	<label for="accounts">
+		<g:message code="contract.accounts.label" default="Accounts" />
+		
+	</label>
+	<g:select name="accounts" from="${entities.Account.list()}" multiple="multiple" optionKey="id" size="5" value="${contractInstance?.accounts*.id}" class="many-to-many"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: contractInstance, field: 'parties', 'error')} ">
 	<label for="parties">
 		<g:message code="contract.parties.label" default="Parties" />
