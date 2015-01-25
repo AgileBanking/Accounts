@@ -19,28 +19,29 @@ hibernate {
 //    cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
 }
 
+
 // environment specific settings
 environments {
     development {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
 //            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-//            url = "jdbc:mysql://localhost:3306/accounts"   
-            url = "jdbc:mysql://accounts.db:3306/accounts?useUnicode=yes&characterEncoding=UTF-8" 
+            url = "jdbc:mysql://accounts.db:3306/accounts?useUnicode=yes&characterEncoding=UTF-8"   
+//            url = "jdbc:mysql://" + "nslookup accounts.db bank.pi".execute().text.split(/(\n)/)[4].split(/(:)/)[1].trim() + ":3306/accounts?useUnicode=yes&characterEncoding=UTF-8" 
         }
     }
     test {
         dataSource {
             dbCreate = "update"
             url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-//            url = "jdbc:mysql://localhost:3306/commons" 
+//            url = "jdbc:mysql://localhost:3306/accounts" 
         }
     }
     production {
         dataSource {
             dbCreate = "update"
             url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-//            url = "jdbc:mysql://localhost:3306/commons" 
+//            url = "jdbc:mysql://localhost:3306/accounts" 
             properties {
                // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
                jmxEnabled = true

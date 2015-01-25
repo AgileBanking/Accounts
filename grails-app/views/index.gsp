@@ -100,11 +100,13 @@
                             <li>Services: ${grailsApplication.serviceClasses.size()}</li>
                             <li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
 			</ul>
-                        <h1>Server</h1>
+                        <h1>Servers</h1>
                         <ul>
                             <li>Local Host Name: ${InetAddress.localHost.hostName}</li>
                             <li>IP Address     : ${InetAddress.localHost.hostAddress}</li> 
+                            <!--
                             <li>Host Name      : ${InetAddress.localHost.canonicalHostName}</li>
+                            -->
                         </ul>
 			<h1>Installed Plugins</h1>
                             <ul>
@@ -114,9 +116,10 @@
                             </ul>
 		</div>
 		<div id="page-body" role="main">
-                    <h2>Component: ACCOUNTS ENTITIES</h2>
-			<p>This is the foundation module of the 'Agile Banking'. It contains those domain classes that manage the Customers' Accounts. They exposed as REST services:</p>
-			<p>These components have been implemented as MVC pattern. The following list shows all available controllers.<p>
+                    <h1>Agile Banking: <b>ACCOUNTS</b></h1>
+			<p>This is the foundation module of the 'Agile Banking'. It contains those domain classes that manage the Customers' Accounts. 
+                            They exposed as REST services: These components have been implemented as MVC pattern. 
+                            The following list shows all available controllers.</p>
 
 			<div id="controller-list" role="navigation">
 				<h2>Available Controllers:</h2>
