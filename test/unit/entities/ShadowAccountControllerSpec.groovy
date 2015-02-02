@@ -1,12 +1,11 @@
 package entities
 
-
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(PartyRoleController)
-@Mock(PartyRole)
-class PartyRoleControllerSpec extends Specification {
+@TestFor(ShadowAccountController)
+@Mock(ShadowAccount)
+class ShadowAccountControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
@@ -20,8 +19,8 @@ class PartyRoleControllerSpec extends Specification {
             controller.index()
 
         then:"The model is correct"
-            !model.partyRoleInstanceList
-            model.partyRoleInstanceCount == 0
+            !model.shadowAccountInstanceList
+            model.shadowAccountInstanceCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -29,7 +28,7 @@ class PartyRoleControllerSpec extends Specification {
             controller.create()
 
         then:"The model is correctly created"
-            model.partyRoleInstance!= null
+            model.shadowAccountInstance!= null
     }
 
     void "Test the save action correctly persists an instance"() {
@@ -37,25 +36,25 @@ class PartyRoleControllerSpec extends Specification {
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
             request.method = 'POST'
-            def partyRole = new PartyRole()
-            partyRole.validate()
-            controller.save(partyRole)
+            def shadowAccount = new ShadowAccount()
+            shadowAccount.validate()
+            controller.save(shadowAccount)
 
         then:"The create view is rendered again with the correct model"
-            model.partyRoleInstance!= null
+            model.shadowAccountInstance!= null
             view == 'create'
 
         when:"The save action is executed with a valid instance"
             response.reset()
             populateValidParams(params)
-            partyRole = new PartyRole(params)
+            shadowAccount = new ShadowAccount(params)
 
-            controller.save(partyRole)
+            controller.save(shadowAccount)
 
         then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/partyRole/show/1'
+            response.redirectedUrl == '/shadowAccount/show/1'
             controller.flash.message != null
-            PartyRole.count() == 1
+            ShadowAccount.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -67,11 +66,11 @@ class PartyRoleControllerSpec extends Specification {
 
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
-            def partyRole = new PartyRole(params)
-            controller.show(partyRole)
+            def shadowAccount = new ShadowAccount(params)
+            controller.show(shadowAccount)
 
         then:"A model is populated containing the domain instance"
-            model.partyRoleInstance == partyRole
+            model.shadowAccountInstance == shadowAccount
     }
 
     void "Test that the edit action returns the correct model"() {
@@ -83,11 +82,11 @@ class PartyRoleControllerSpec extends Specification {
 
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
-            def partyRole = new PartyRole(params)
-            controller.edit(partyRole)
+            def shadowAccount = new ShadowAccount(params)
+            controller.edit(shadowAccount)
 
         then:"A model is populated containing the domain instance"
-            model.partyRoleInstance == partyRole
+            model.shadowAccountInstance == shadowAccount
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -97,28 +96,28 @@ class PartyRoleControllerSpec extends Specification {
             controller.update(null)
 
         then:"A 404 error is returned"
-            response.redirectedUrl == '/partyRole/index'
+            response.redirectedUrl == '/shadowAccount/index'
             flash.message != null
 
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def partyRole = new PartyRole()
-            partyRole.validate()
-            controller.update(partyRole)
+            def shadowAccount = new ShadowAccount()
+            shadowAccount.validate()
+            controller.update(shadowAccount)
 
         then:"The edit view is rendered again with the invalid instance"
             view == 'edit'
-            model.partyRoleInstance == partyRole
+            model.shadowAccountInstance == shadowAccount
 
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            partyRole = new PartyRole(params).save(flush: true)
-            controller.update(partyRole)
+            shadowAccount = new ShadowAccount(params).save(flush: true)
+            controller.update(shadowAccount)
 
         then:"A redirect is issues to the show action"
-            response.redirectedUrl == "/partyRole/show/$partyRole.id"
+            response.redirectedUrl == "/shadowAccount/show/$shadowAccount.id"
             flash.message != null
     }
 
@@ -129,23 +128,23 @@ class PartyRoleControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
-            response.redirectedUrl == '/partyRole/index'
+            response.redirectedUrl == '/shadowAccount/index'
             flash.message != null
 
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def partyRole = new PartyRole(params).save(flush: true)
+            def shadowAccount = new ShadowAccount(params).save(flush: true)
 
         then:"It exists"
-            PartyRole.count() == 1
+            ShadowAccount.count() == 1
 
         when:"The domain instance is passed to the delete action"
-            controller.delete(partyRole)
+            controller.delete(shadowAccount)
 
         then:"The instance is deleted"
-            PartyRole.count() == 0
-            response.redirectedUrl == '/partyRole/index'
+            ShadowAccount.count() == 0
+            response.redirectedUrl == '/shadowAccount/index'
             flash.message != null
     }
 }

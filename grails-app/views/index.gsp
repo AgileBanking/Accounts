@@ -125,7 +125,7 @@
 				<h2>Available Controllers:</h2>
 				<ul>
 					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName - "admin." - "entities." - "Controller"}</g:link></li>
+						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName - "admin." - "entities." - "Controller" - 'asset.pipeline.' -'grails.plugin.'}</g:link></li>
 					</g:each>
 				</ul>
 			</div>

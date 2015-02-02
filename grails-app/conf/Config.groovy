@@ -12,10 +12,11 @@
 // }
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
-grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
-grails.mime.use.accept.header = false
-grails.mime.types = [
-    all:           '*/*',
+
+// The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
+grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
+grails.mime.types = [ // the first one is the default format
+    all:           '*/*', // 'all' maps to '*' or the first available format in withFormat
     atom:          'application/atom+xml',
     css:           'text/css',
     csv:           'text/csv',
@@ -26,37 +27,40 @@ grails.mime.types = [
     multipartForm: 'multipart/form-data',
     rss:           'application/rss+xml',
     text:          'text/plain',
+    hal:           ['application/hal+json','application/hal+xml'],
     xml:           ['text/xml', 'application/xml']
 ]
-
-// Include version for JSON generated output.
-//grails.converters.json.domain.include.version = true
- 
-// Include version for XML generated output.
-//grails.converters.xml.domain.include.version = true
- 
-// Include version for both XML and JSON output.
-grails.converters.domain.include.version = true
 
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
 
-// What URL patterns should be processed by the resources plugin
-grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
-
-// The default codec used to encode data with ${}
-grails.views.default.codec = "html" // none, html, base64
-grails.views.gsp.encoding = "UTF-8"
-grails.converters.encoding = "UTF-8"
+// Legacy setting for codec used to encode data with ${}
+grails.views.default.codec = "html"
 
 // The default scope for controllers. May be prototype, session or singleton.
 // If unspecified, controllers are prototype scoped.
-//grails.controllers.defaultScope = 'singleton' // Only one instance of the controller ever exists (recommended for actions as methods)
-grails.controllers.defaultScope = 'prototype' //  A new controller will be created for each request (recommended for actions as Closure properties)
-//grails.controllers.defaultScope = 'session ' //  One controller is created for the scope of a user session
+grails.controllers.defaultScope = 'singleton'
 
-// enable Sitemesh preprocessing of GSP pages
-grails.views.gsp.sitemesh.preprocess = true
+// GSP settings
+grails {
+    views {
+        gsp {
+            encoding = 'UTF-8'
+            htmlcodec = 'xml' // use xml escaping instead of HTML4 escaping
+            codecs {
+                expression = 'html' // escapes values inside ${}
+                scriptlet = 'html' // escapes output from scriptlets in GSPs
+                taglib = 'none' // escapes output from taglibs
+                staticparts = 'none' // escapes output from static template parts
+            }
+        }
+        // escapes all not-encoded output at final stage of outputting
+        // filteringCodecForContentType.'text/html' = 'html'
+    }
+}
+
+
+grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration
 grails.scaffolding.templates.domainSuffix = 'Instance'
 
@@ -75,13 +79,11 @@ grails.exceptionresolver.params.exclude = ['password']
 // configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
 grails.hibernate.cache.queries = false
 
-// Configure json & xml converters
-//grails.converters.json.date = "javascript"
-grails.converters.domain.include.version 
-grails.converters.json.domain.include.version = true
-grails.converters.xml.domain.include.version = true 
-//grails.converters.json.pretty.print = true
-//grails.converters.xml.pretty.print = true
+// configure passing transaction's read-only attribute to Hibernate session, queries and criterias
+// set "singleSession = false" OSIV mode in hibernate configuration after enabling
+grails.hibernate.pass.readonly = false
+// configure passing read-only to OSIV session by default, requires "singleSession = false" OSIV mode
+grails.hibernate.osiv.readonly = false
 
 environments {
     development {
@@ -94,15 +96,12 @@ environments {
 }
 
 // log4j configuration
-log4j = {
+log4j.main = {
     // Example of changing the log pattern for the default console appender:
     //
-    appenders {
-         stdout: "StackTrace"
-//        file name:'stacktrace', file:'myStacktrace.log'
-//        console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-//        rollingFile name: "stacktrace", maxFileSize: 1024, file: "/opt/tomcat/logs/myApp-stacktrace.log"
-    }
+    //appenders {
+    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+    //}
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
@@ -116,27 +115,3 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
-
-// Uncomment and edit the following lines to start using Grails encoding & escaping improvements
-
-/* remove this line 
-// GSP settings
-grails {
-    views {
-        gsp {
-            encoding = 'UTF-8'
-            htmlcodec = 'xml' // use xml escaping instead of HTML4 escaping
-            codecs {
-                expression = 'html' // escapes values inside null
-                scriptlet = 'none' // escapes output from scriptlets in GSPs
-                taglib = 'none' // escapes output from taglibs
-                staticparts = 'none' // escapes output from static template parts
-            }
-        }
-        // escapes all not-encoded output at final stage of outputting
-        filteringCodecForContentType {
-            //'text/html' = 'html'
-        }
-    }
-}
-remove this line */
