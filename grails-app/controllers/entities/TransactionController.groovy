@@ -49,7 +49,7 @@ class TransactionController {
         transactionInstance.save flush:true
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.created.message', args: [message(code: 'transactionInstance.label', default: 'Transaction'), transactionInstance.id])
                 redirect transactionInstance
             }
@@ -76,7 +76,7 @@ class TransactionController {
         transactionInstance.save flush:true
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Transaction.label', default: 'Transaction'), transactionInstance.id])
                 redirect transactionInstance
             }
@@ -96,7 +96,7 @@ class TransactionController {
         transactionInstance.save flush:true
     
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Transaction.label', default: 'Transaction'), transactionInstance.id])
                 redirect action:"index", method:"GET"
             }
@@ -117,7 +117,7 @@ class TransactionController {
         transactionInstance.save flush:true 
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.undeleted.message', args: [message(code: 'Transaction.label', default: 'Transaction'), transactionInstance.id])
                 redirect action:"index", method:"GET"
             }
@@ -129,7 +129,7 @@ class TransactionController {
 */
     protected void notFound() {
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'transactionInstance.label', default: 'Transaction'), params.id])
                 redirect action: "index", method: "GET"
             }

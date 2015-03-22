@@ -1,7 +1,5 @@
 package entities
 
-
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -38,7 +36,7 @@ class PartyRoleController {
         partyRoleInstance.save flush:true
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.created.message', args: [message(code: 'partyRoleInstance.label', default: 'PartyRole'), partyRoleInstance.id])
                 redirect partyRoleInstance
             }
@@ -65,7 +63,7 @@ class PartyRoleController {
         partyRoleInstance.save flush:true
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'PartyRole.label', default: 'PartyRole'), partyRoleInstance.id])
                 redirect partyRoleInstance
             }
@@ -84,7 +82,7 @@ class PartyRoleController {
         partyRoleInstance.delete flush:true
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'PartyRole.label', default: 'PartyRole'), partyRoleInstance.id])
                 redirect action:"index", method:"GET"
             }
@@ -94,7 +92,7 @@ class PartyRoleController {
 
     protected void notFound() {
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'partyRoleInstance.label', default: 'PartyRole'), params.id])
                 redirect action: "index", method: "GET"
             }

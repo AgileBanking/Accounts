@@ -59,7 +59,7 @@ class AccountController {
         accountInstance.save flush:true
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.created.message', args: [message(code: 'accountInstance.label', default: 'Account'), accountInstance.id])
                 redirect accountInstance
             }
@@ -86,7 +86,7 @@ class AccountController {
         accountInstance.save flush:true
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Account.label', default: 'Account'), accountInstance.id])
                 redirect accountInstance
             }
@@ -106,7 +106,7 @@ class AccountController {
         accountInstance.save flush:true
     
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Account.label', default: 'Account'), accountInstance.id])
                 redirect action:"index", method:"GET"
             }
@@ -127,7 +127,7 @@ class AccountController {
         accountInstance.save flush:true 
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.undeleted.message', args: [message(code: 'Account.label', default: 'Account'), accountInstance.id])
                 redirect action:"index", method:"GET"
             }
@@ -139,7 +139,7 @@ class AccountController {
 
     protected void notFound() {
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'accountInstance.label', default: 'Account'), params.id])
                 redirect action: "index", method: "GET"
             }

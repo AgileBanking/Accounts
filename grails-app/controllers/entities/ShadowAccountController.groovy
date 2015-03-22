@@ -59,7 +59,7 @@ class ShadowAccountController {
         shadowAccountInstance.save flush:true
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.created.message', args: [message(code: 'shadowAccountInstance.label', default: 'ShadowAccount'), shadowAccountInstance.id])
                 redirect shadowAccountInstance
             }
@@ -86,7 +86,7 @@ class ShadowAccountController {
         shadowAccountInstance.save flush:true
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'ShadowAccount.label', default: 'ShadowAccount'), shadowAccountInstance.id])
                 redirect shadowAccountInstance
             }
@@ -106,7 +106,7 @@ class ShadowAccountController {
         shadowAccountInstance.save flush:true
     
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'ShadowAccount.label', default: 'ShadowAccount'), shadowAccountInstance.id])
                 redirect action:"index", method:"GET"
             }
@@ -127,7 +127,7 @@ class ShadowAccountController {
         shadowAccountInstance.save flush:true 
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.undeleted.message', args: [message(code: 'ShadowAccount.label', default: 'ShadowAccount'), shadowAccountInstance.id])
                 redirect action:"index", method:"GET"
             }
@@ -139,7 +139,7 @@ class ShadowAccountController {
 
     protected void notFound() {
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'shadowAccountInstance.label', default: 'ShadowAccount'), params.id])
                 redirect action: "index", method: "GET"
             }

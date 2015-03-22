@@ -36,7 +36,7 @@ class ContractController {
         contractInstance.save flush:true
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.created.message', args: [message(code: 'contractInstance.label', default: 'Contract'), contractInstance.id])
                 redirect contractInstance
             }
@@ -63,7 +63,7 @@ class ContractController {
         contractInstance.save flush:true
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Contract.label', default: 'Contract'), contractInstance.id])
                 redirect contractInstance
             }
@@ -82,7 +82,7 @@ class ContractController {
         contractInstance.delete flush:true
 
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Contract.label', default: 'Contract'), contractInstance.id])
                 redirect action:"index", method:"GET"
             }
@@ -92,7 +92,7 @@ class ContractController {
 
     protected void notFound() {
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'contractInstance.label', default: 'Contract'), params.id])
                 redirect action: "index", method: "GET"
             }

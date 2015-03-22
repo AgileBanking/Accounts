@@ -94,7 +94,7 @@ class AdminController {
                     relationships += "[$domainClass.name],"  
                 }
             }
-            redirect(url: "http://yuml.me/diagram/nofunky;dir:LR/class/draw2/" + classes + relationships)            
+            redirect(url: "http://yuml.me/diagram/nofunky;dir:TD/class/draw2/" + classes + relationships)            
         }
         else {
             // Show the local diagram
